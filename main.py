@@ -15,10 +15,6 @@ user_parameters = {
    "password" : "<password>"
 }
 
-(access_token, refresh_token) = get_aad_token()
-pat = get_pat_with_aad_token(access_token)
-print_pat(pat)
-
 def get_aad_token():
   # configure AuthenticationContext
   # authority URL and tenant ID are used
@@ -35,7 +31,7 @@ def get_aad_token():
 
   return (token_response['accessToken'], token_response['refreshToken'])
 
-def get_pat_with_aad_token(access_token):
+def create_pat_with_aad_token(access_token):
 
   domain = databricks_instance
   token = access_token
@@ -49,7 +45,7 @@ def get_pat_with_aad_token(access_token):
   response = requests.post(
     base_url,
     headers=headers,
-    data = {
+    json = {
       "lifetime_seconds": 100,
       "comment": "this is an example token"
     }
@@ -69,8 +65,12 @@ def get_pat_with_aad_token(access_token):
     print ('The exception is: %s' % str(e))
 
 def print_pat(pat):
-  print ('token_value' + str(pat["token_value"]))
-  print ('token_info.token_id' + str(pat["token_info"]["token_id"]))
-  print ('token_info.creation_time' + str(pat["token_info"]["creation_time"]))
-  print ('token_info.expiry_time' + str(pat["token_info"]["expiry_time"]))
-  print ('token_info.comment' + str(pat["token_info"]["comment"]))
+  print ('token_value: ' + str(pat["token_value"]))
+  print ('token_info.token_id: ' + str(pat["token_info"]["token_id"]))
+  print ('token_info.creation_time: ' + str(pat["token_info"]["creation_time"]))
+  print ('token_info.expiry_time: ' + str(pat["token_info"]["expiry_time"]))
+  print ('token_info.comment: ' + str(pat["token_info"]["comment"]))
+
+(access_token, refresh_token) = get_aad_token()
+pat = create_pat_with_aad_token(access_token)
+print_pat(pat)
