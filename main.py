@@ -55,22 +55,22 @@ def get_pat_with_aad_token(access_token):
     }
   )
 
-  print 'response header: ' + str(response.headers)
-  print 'the response is: ' + str(response.content)
+  print ('response header: ' + str(response.headers))
+  print ('the response is: ' + str(response.content))
   
   try:
-    print 'Decoding response as JSON... '
+    print ('Decoding response as JSON... ')
     res_json = response.json()
     return res_json
         
   except Exception as e:
-    print 'Response cannot be parsed as JSON:'
-    print '\t: ' + str(response)
-    print 'The exception is: %s' % str(e)
+    print ('Response cannot be parsed as JSON:')
+    print ('\t: ' + str(response))
+    print ('The exception is: %s' % str(e))
 
-def print_pat(pat)
-  print 'token_value' + str(pat["token_value"])
-  print 'token_info.token_id' + str(pat["token_info"]["token_id"])
-  print 'token_info.creation_time' + str(pat["token_info"]["creation_time"])
-  print 'token_info.expiry_time' + str(pat["token_info"]["expiry_time"])
-  print 'token_info.comment' + str(pat["token_info"]["comment"])
+def print_pat(pat):
+  print ('token_value' + str(pat["token_value"]))
+  print ('token_info.token_id' + str(pat["token_info"]["token_id"]))
+  print ('token_info.creation_time' + str(pat["token_info"]["creation_time"]))
+  print ('token_info.expiry_time' + str(pat["token_info"]["expiry_time"]))
+  print ('token_info.comment' + str(pat["token_info"]["comment"]))
